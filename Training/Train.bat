@@ -1,0 +1,1 @@
+python main.py --config-file Train.yaml

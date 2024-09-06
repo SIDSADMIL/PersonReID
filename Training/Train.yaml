@@ -1,0 +1,50 @@
+model:
+  name: 'osnet_ain_x1_0'
+  pretrained: False
+  load_weights1: 'log/thirdtesttraining/IVIS_Coustom_Dataset/2024_09_02_18_51_01/model1/model/model_6__2024_09_04_18_53_18.pth'
+  resume1: 'log/thirdtesttraining/IVIS_Coustom_Dataset/2024_09_02_18_51_01/model1/model.pth.tar-6'
+  deploy: 'model1'
+
+data:
+  type: 'image'
+  sources: ['reid']
+  targets: ['reid']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip','random_erase','color_jitter','random_crop','random_patch']
+  save_dir: 'log/thirdtesttraining/IVIS_Coustom_Dataset'
+  root: 'dataset/CoustomDataMIxedOldNew'
+
+loss:
+  name: 'triplet'
+  softmax:
+    label_smooth: True
+  triplet:
+    margin: 0.3
+    weight_t: 0.5
+    weight_x: 1.
+  dml:
+    weight_ml: 1.
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0015
+  max_epoch: 100
+  batch_size: 16
+  fixbase_epoch: 30
+  lr_scheduler: 'cosine'
+  open_layers: ['classifier']
+  print_freq: 1
+
+test:
+  batch_size: 16
+  dist_metric: 'cosine'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 1
+  start_eval: 1
+  ranks: [1,2,3]
+  rerank: False
+  visrank: False
+  visrank_topk: 1

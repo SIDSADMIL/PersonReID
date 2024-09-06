@@ -1,0 +1,8 @@
+
+*.pyc
+*.mp4
+*.avi
+/Dataset/model_folder
+/Dataset/model_folder_best
+/Core_Testing_Code/model_folder
+/Core_Testing_Code/model_folder_best
